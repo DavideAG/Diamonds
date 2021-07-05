@@ -104,8 +104,8 @@ resource "aws_security_group" "protected" {
 
 
 # Keypair: replace with your own PUBLIC key.
-resource "aws_key_pair" "webserver" {
-  key_name   = "webserver-keypair"
+resource "aws_key_pair" "diamond_key_pair" {
+  key_name   = "diamond-keypair"
   public_key = file("${path.module}/aws_project.pub") 
 }
 
@@ -115,7 +115,7 @@ resource "aws_instance" "diamond_ec2_instance" {
   ami                     = "ami-0f89681a05a3a9de7"
   availability_zone       = var.availability_zone
   instance_type           = "t2.micro"
-  key_name                = aws_key_pair.webserver.key_name
+  key_name                = aws_key_pair.diamond_key_pair.key_name
   vpc_security_group_ids  = [aws_security_group.protected.id]
   subnet_id               = aws_subnet.diamond_subnet.id
   

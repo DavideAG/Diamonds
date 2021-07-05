@@ -30,7 +30,7 @@ resource "aws_lambda_function" "lambda_kinesis_to_dynamo" {
   filename      = "${path.module}/outputs/lambda_kinesis_to_dynamo_payload.zip"
   function_name = "lambda_kinesis_to_dynamo"
   role          = aws_iam_role.iam_for_lambda_kinesis.arn
-  handler       = "lambda_kinesis_to_dynamo.hello_handler"
+  handler       = "lambda_kinesis_to_dynamo.kinesis_to_dynamo_handler"
 
   /* source_code_hash = filebase64sha256("lambda_function_payload.zip") */
 

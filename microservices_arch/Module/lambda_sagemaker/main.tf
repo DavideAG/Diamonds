@@ -1,5 +1,5 @@
-resource "aws_iam_role" "iam_for_lambda_api_gateway" {
-  name = "iam_for_lambda_api_gateway"
+resource "aws_iam_role" "iam_for_lambda_sagemaker" {
+  name = "iam_for_lambda_sagemaker"
 
   assume_role_policy = <<EOF
 {
@@ -29,8 +29,8 @@ data "archive_file" "archive" {
 resource "aws_lambda_function" "lambda_rest_to_sagemaker" {
   filename      = "${path.module}/outputs/lambda_rest_to_sagemaker_payload.zip"
   function_name = "lambda_rest_to_sagemaker"
-  role          = aws_iam_role.iam_for_lambda_api_gateway.arn
-  handler       = "lambda_rest_to_sagemaker.hello_handler"
+  role          = aws_iam_role.iam_for_lambda_sagemaker.arn
+  handler       = "lambda_rest_to_sagemaker.rest_to_sagemaker_handler"
 
   /* source_code_hash = filebase64sha256("lambda_function_payload.zip") */
 
@@ -41,4 +41,12 @@ resource "aws_lambda_function" "lambda_rest_to_sagemaker" {
       foo = "bar"
     }
   } */
+}
+
+// check if it is needed to be triggered by the rest api gateway
+resource "aws_lambda_permission" "allow_api" {
+  statement_id  = "AllowAPIgatewayInvokation"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda_rest_to_sagemaker.function_name
+  principal     = "apigateway.amazonaws.com"
 }

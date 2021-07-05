@@ -30,8 +30,14 @@ module "lambda_kinesis" {
   source = "./Module/lambda_kinesis"
 }
 
-module "lambda_api_gateway" {
-  source = "./Module/lambda_api_gateway"
+module "lambda_sagemaker" {
+  source = "./Module/lambda_sagemaker"
+}
+
+module "api_gateway" {
+  source = "./Module/API_Gateway"
+
+  sagemaker_lambda = module.lambda_sagemaker.sagemaker_lambda
 }
 
 module "kinesis_firehose" {

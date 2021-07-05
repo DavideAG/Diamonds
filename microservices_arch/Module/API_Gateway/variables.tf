@@ -8,6 +8,7 @@ variable "aws_default_profile" {
     default     = "default"
 }
 
-variable "diamond_bucket" {
-  type = string
+variable "sagemaker_lambda" {
+    description = "Sagemaker lambda obj reference." 
 }
+

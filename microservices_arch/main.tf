@@ -22,6 +22,18 @@ module "s3_bucket" {
   source = "./Module/S3"
 }
 
+module "dynamodb" {
+  source = "./Module/DynamoDB"
+}
+
+module "lambda_kinesis" {
+  source = "./Module/lambda_kinesis"
+}
+
+module "lambda_api_gateway" {
+  source = "./Module/lambda_api_gateway"
+}
+
 module "kinesis_firehose" {
   source = "./Module/kinesis_firehose"
   

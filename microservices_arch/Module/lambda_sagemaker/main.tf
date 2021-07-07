@@ -17,8 +17,31 @@ resource "aws_iam_role" "iam_for_lambda_sagemaker" {
 }
 EOF
 }
-/* TODO: check if we need to attach a policy like AmazonDynamoDBFullAccess */
 
+
+resource "aws_iam_policy" "sagemaker_policy" {
+  name        = "sagemaker-policy"
+  description = "A sagemaker policy to invoke the endpoint"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "sagemaker:InvokeEndpoint",
+            "Resource": "arn:aws:sagemaker:eu-west-1:392050061436:endpoint/sagemaker-scikit-learn-2021-07-07-07-02-33-511"
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "sagemaker_policy_attach" {
+  role       = aws_iam_role.iam_for_lambda_sagemaker.name
+  policy_arn = aws_iam_policy.sagemaker_policy.arn
+}
 
 data "archive_file" "archive" {
   type        = "zip"

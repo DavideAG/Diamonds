@@ -3,10 +3,9 @@ import urllib3
 import boto3
 import uuid
 
-runtime = boto3.client('sagemaker-runtime')
 dynamodb = boto3.client('dynamodb')
 
-API_GATEWAY_ENDPOINT = 'https://58jc72wtjj.execute-api.eu-west-1.amazonaws.com/default/endpoint-inference-function'
+API_GATEWAY_ENDPOINT = '${api_url_complete}'
 TABLE_NAME = 'davide-giorgio-prediction-wines-table'
 CONTENT_TYPE = 'text/csv'
 
@@ -27,6 +26,8 @@ def kinesis_to_dynamo_handler(event, context):
     
     r.release_conn()
     result = r.data.decode().strip()
+
+    return result
 
     # Parse it from str to json
     prediction = json.loads(result)['body']['prediction']

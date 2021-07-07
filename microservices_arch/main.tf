@@ -28,6 +28,8 @@ module "dynamodb" {
 
 module "lambda_kinesis" {
   source = "./Module/lambda_kinesis"
+
+  api_url_complete = module.api_gateway.complete_unvoke_url
 }
 
 module "lambda_sagemaker" {

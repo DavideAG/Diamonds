@@ -123,6 +123,18 @@ resource "aws_instance" "diamond_ec2_instance" {
     volume_size = 50
   }
 
+  /* provisioner "file" {
+    connection {
+        type     = "ssh"
+        user     = "ec2-user"
+        password = "${var.root_password}"
+        host     = "${var.host}"
+      }
+
+    source      = "${path.module}/data_producer.py"
+    destination = "/home/ec2-user/data_producer.py"
+  } */
+
   tags = {
     Name = "${var.tag_name}-ec2"
   }

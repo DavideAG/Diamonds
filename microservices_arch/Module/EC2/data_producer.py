@@ -30,7 +30,7 @@ while True:
             }
             for x in rows
         ],
-        StreamName="terraform-kinesis-test"
+        StreamName="diamond-kinesis-stream"
     )
 
     print("Sleeping 10 seconds...")

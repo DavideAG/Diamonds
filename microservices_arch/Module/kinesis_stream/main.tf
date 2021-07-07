@@ -1,8 +1,5 @@
-
-
-
 resource "aws_kinesis_stream" "kinesis_stream" {
-  name             = "terraform-kinesis-test"
+  name             = "diamond-kinesis-stream"
   shard_count      = 1
   retention_period = 48
 

@@ -11,3 +11,11 @@ variable "aws_default_profile" {
 variable "diamond_bucket" {
   type = string
 }
+
+variable "kinesis_stream_arn" {
+  type = string
+}
+
+variable "kinesis_stream_name" {
+  type = string
+}

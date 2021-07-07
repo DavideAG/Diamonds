@@ -30,6 +30,8 @@ module "lambda_kinesis" {
   source = "./Module/lambda_kinesis"
 
   api_url_complete = module.api_gateway.complete_unvoke_url
+  dynamodb_prediction_table = var.dynamodb_prediction_table
+  kinesis_stream_arn = module.kinesis_stream.kinesis_stream_arn
 }
 
 module "lambda_sagemaker" {
@@ -45,5 +47,7 @@ module "api_gateway" {
 module "kinesis_firehose" {
   source = "./Module/kinesis_firehose"
   
+  kinesis_stream_name = module.kinesis_stream.kinesis_stream_name
+  kinesis_stream_arn = module.kinesis_stream.kinesis_stream_arn
   diamond_bucket = module.s3_bucket.s3_arn
 }

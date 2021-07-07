@@ -80,13 +80,9 @@ resource "aws_api_gateway_integration_response" "diamond_integration_response" {
   resource_id = aws_api_gateway_resource.diamond_resource.id
   http_method = aws_api_gateway_method.get_method.http_method
   status_code = aws_api_gateway_method_response.diamond_method_response.status_code
-  /* response_templates {
-    "application/json" = ""
-  } */
 }
 
 # Deployment
-
 resource "aws_api_gateway_deployment" "diamond_deployment" {
   depends_on = [aws_api_gateway_integration.diamond_integration]
   rest_api_id = aws_api_gateway_rest_api.diamond_rest_api.id

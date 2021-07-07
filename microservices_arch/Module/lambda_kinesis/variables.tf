@@ -10,5 +10,15 @@ variable "aws_default_profile" {
 
 variable "api_url_complete" {
     description = "API gateway diamond url" 
-    type = string
+    type        = string
+}
+
+variable "dynamodb_prediction_table" {
+  description = "The name of the DynamoDB table that stores the predictions"
+  type        = string
+}
+
+variable "kinesis_stream_arn" {
+  description = "kinesis stream arn"
+  type        = string
 }

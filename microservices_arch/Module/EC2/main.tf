@@ -1,6 +1,3 @@
-#based on 
-#https://gitlab.com/mrcrilly/terraform-10x-webserver/-/blob/master/webserver.tf
-
 # VPC
 resource "aws_vpc" "diamond_vpc" {
   cidr_block = "10.1.0.0/16"
@@ -122,18 +119,6 @@ resource "aws_instance" "diamond_ec2_instance" {
   root_block_device {
     volume_size = 50
   }
-
-  /* provisioner "file" {
-    connection {
-        type     = "ssh"
-        user     = "ec2-user"
-        password = "${var.root_password}"
-        host     = "${var.host}"
-      }
-
-    source      = "${path.module}/data_producer.py"
-    destination = "/home/ec2-user/data_producer.py"
-  } */
 
   tags = {
     Name = "${var.tag_name}-ec2"
